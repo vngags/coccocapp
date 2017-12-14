@@ -71,12 +71,13 @@
                         </div> 
                     </div>
                 </div>
-                <div class="_right wHeight">                    
+
+                <div v-if="!is_videocall" class="_right wHeight">                    
                     <div class="top">
                         <span>Đến: <span v-if="chatter && chatter != undefined" class="name"><a :href="'/u/'+chatter.slug">{{ chatter.name }}</a></span></span>
                         <ul class="list-inline pull-right">
                             <li><a href=""><i class="fa fa-phone size20i"></i></a></li>
-                            <li><a href=""><i class="fa fa-video-camera size20i"></i></a></li>
+                            <li><a @click="is_videocall = true"><i class="fa fa-video-camera size20i"></i></a></li>
                         </ul>
                     </div>
                     <!-- Loading -->
@@ -137,6 +138,11 @@
                     </div>
                     <!-- \Write -->                    
                 </div>
+
+                <!-- Video Call Panel -->
+                <video-call v-if="chatter && is_videocall" class="_right wHeight" :user_id="chatter.code"></video-call>
+                <!-- \Video Call panel -->
+
             </div>
         </div>     
         <!-- \ Right Column -->   
@@ -144,170 +150,171 @@
 </template>
 
 <script>
-import { post, get } from '../../../api'
+import { post, get } from "../../../api";
+import VideoCall from "./VideoCall"
 export default {
-    props: ['chatting'],
-    data() {
-        return {
-            loading: false,
-            message: null,
-            winHeight: 0,
-            fetched: false,
-            is_typing: false
-        }
+  components: {
+    VideoCall
+  },
+  props: ["chatting"],
+  data() {
+    return {
+      loading: false,
+      message: null,
+      winHeight: 0,
+      fetched: false,
+      is_typing: false,
+      is_videocall: false
+    };
+  },
+  mounted() {
+    let vm = this;
+    this.fetchMembers();
+    this.getWinSize();
+    this.$nextTick(function() {
+      window.addEventListener("resize", vm.getWinSize);
+    });
+  },
+  methods: {
+    activeClass(code) {
+      if (this.chatter && this.chatter.code != undefined) {
+        return this.chatter.code == code ? "active" : "";
+      }
     },
-    mounted() {
-        let vm = this
-        this.fetchMembers();
-        this.getWinSize();
-        this.$nextTick(function() {
-              window.addEventListener('resize', vm.getWinSize);
-        })
+    fetchMembers() {
+      let vm = this;
+      get("/api/v1/message/get_users").then(resp => {
+        this.$store.commit("refresh_messages", 0);
+        resp.data.forEach(function(item) {
+          vm.$store.commit("add_chatters", item);
+        });
+      });
     },
-    methods: {
-        activeClass(code) {
-            if(this.chatter && this.chatter.code != undefined) {
-                return (this.chatter.code == code) ? 'active' : ''
-            }
-        },
-        fetchMembers() {
-            let vm = this
-            get('/api/v1/message/get_users')
-            .then(resp => {
-                this.$store.commit('refresh_messages', 0)
-                resp.data.forEach(function(item) {
-                    vm.$store.commit('add_chatters', item)
-                })
-            })
-        },
-        selectChatter() {
-            if(this.chatting) {
-                post(`/api/v1/message/get_user/${this.chatting}`)
-                .then(resp => {
-                    //push to chatters if not exists
-                    this.$store.commit('add_chatter_if_not_exists', resp.data)
-                    this.select(this.chatting)
-                })                
-            }            
-        },
-        select(code) {
-            let vm = this
-            
+    selectChatter() {
+      if (this.chatting) {
+        post(`/api/v1/message/get_user/${this.chatting}`).then(resp => {
+          //push to chatters if not exists
+          this.$store.commit("add_chatter_if_not_exists", resp.data);
+          this.select(this.chatting);
+        });
+      }
+    },
+    select(code) {
+      let vm = this;
 
-            if(this.fetched == false) {
-                $('#chat-main').removeClass('active-chat');
-                $('._left .profile-info').removeClass('active')
-                this.fetchSelectData(code);
-            }else{
-                if(this.chatter.code != code) {
-                    $('#chat-main').removeClass('active-chat');
-                    $('._left .profile-info').removeClass('active')
-                    this.fetchSelectData(code);
-                }
-            }        
-            setTimeout(function() {
-                $('#chat-main').addClass('active-chat');
-                $('._left .profile-info').addClass('active')
-            },10)
-        },
-        fetchSelectData(code) {
-            let vm = this
-            this.loading = true
-            this.$store.commit('select_chatter', code)
-            get(`/api/v1/message/${code}`)
-            .then(resp => {
-                this.$store.commit('refresh_messages', 0)
-                if(resp.data.status == 'avalible') {
-                    console.log('No History');
-                }else{                    
-                    resp.data.forEach(function(item) {
-                        vm.$store.commit('add_messages', item)
-                        //Scroll to bottom
-                        vm.$nextTick(function() {
-                            var container = document.getElementById("chat-main");
-                            container.scrollTop = container.scrollHeight;
-                        }) 
-                    })
-                    this.fetched = true      
-                }
-                this.loading = false
-                window.history.pushState("object or string", "Title", "/chat/"+code);                
-            })
-        },
-        send_message() {
-            if(this.message && this.chatter) {
-                post(`/api/v1/message/${this.chatter.code}`, {
-                    message: this.message
-                }).then(resp => {
-                    if(resp.data) {
-                        this.$store.commit('add_messages', {
-                            from: this.user.code,
-                            message: this.message,
-                            time: new Date()
-                        })
-                    }
-                    this.message = ''
-                })
-            }
-        },
-        typing_message() {
-            if(this.message && this.message.length >= 3 && this.is_typing == false) {
-                post(`/api/v1/message/typing`, {
-                    user_code: this.chatter.code
-                }).then(resp => {
-                    this.is_typing = true
-                })
-            }else{
-                this.is_typing = false
-            }            
-        },
-        bubbleClass(data) {
-            if(data.user != 'undefined' && data.user.code != this.user.code) {
-                return 'you';
-            }else{
-                return 'me'
-            }
-        },
-        getWinSize() {
-            this.winHeight = document.documentElement.clientHeight - 60;
+      if (this.fetched == false) {
+        $("#chat-main").removeClass("active-chat");
+        $("._left .profile-info").removeClass("active");
+        this.fetchSelectData(code);
+      } else {
+        if (this.chatter.code != code) {
+          $("#chat-main").removeClass("active-chat");
+          $("._left .profile-info").removeClass("active");
+          this.fetchSelectData(code);
         }
+      }
+      setTimeout(function() {
+        $("#chat-main").addClass("active-chat");
+        $("._left .profile-info").addClass("active");
+      }, 10);
     },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.getWinSize);
-    },
-    computed: {
-        user() {
-           return this.$store.state.auth_user
-        },
-        chatters() {
-           return this.$store.getters.get_all_chatter
-        },
-        messages() {
-            return this.$store.getters.get_all_messages
-        },
-        chatter() {
-            return this.$store.getters.get_chatter
-        },
-        user_typing() {
-            return this.$store.getters.get_message_user_typing
+    fetchSelectData(code) {
+      let vm = this;
+      this.loading = true;
+      this.$store.commit("select_chatter", code);
+      get(`/api/v1/message/${code}`).then(resp => {
+        this.$store.commit("refresh_messages", 0);
+        if (resp.data.status == "avalible") {
+          console.log("No History");
+        } else {
+          resp.data.forEach(function(item) {
+            vm.$store.commit("add_messages", item);
+            //Scroll to bottom
+            vm.$nextTick(function() {
+              var container = document.getElementById("chat-main");
+              container.scrollTop = container.scrollHeight;
+            });
+          });
+          this.fetched = true;
         }
+        this.loading = false;
+        window.history.pushState("object or string", "Title", "/chat/" + code);
+      });
     },
-    watch: {
-        chatters() {
-            this.selectChatter()
-        },
-        user_typing() {
-            this.$nextTick(function() {
-                var container = document.getElementById("chat-main");
-                container.scrollTop = container.scrollHeight;
-            }) 
-        }
+    send_message() {
+      if (this.message && this.chatter) {
+        post(`/api/v1/message/${this.chatter.code}`, {
+          message: this.message
+        }).then(resp => {
+          if (resp.data) {
+            this.$store.commit("add_messages", {
+              from: this.user.code,
+              message: this.message,
+              time: new Date()
+            });
+          }
+          this.message = "";
+        });
+      }
     },
-}
+    typing_message() {
+      if (this.message && this.message.length >= 3 && this.is_typing == false) {
+        post(`/api/v1/message/typing`, {
+          user_code: this.chatter.code
+        }).then(resp => {
+          this.is_typing = true;
+        });
+      } else {
+        this.is_typing = false;
+      }
+    },
+    bubbleClass(data) {
+      if (data.user != "undefined" && data.user.code != this.user.code) {
+        return "you";
+      } else {
+        return "me";
+      }
+    },
+    getWinSize() {
+      this.winHeight = document.documentElement.clientHeight - 60;
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.getWinSize);
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth_user;
+    },
+    chatters() {
+      return this.$store.getters.get_all_chatter;
+    },
+    messages() {
+      return this.$store.getters.get_all_messages;
+    },
+    chatter() {
+      return this.$store.getters.get_chatter;
+    },
+    user_typing() {
+      return this.$store.getters.get_message_user_typing;
+    }
+  },
+  watch: {
+    chatters() {
+      this.selectChatter();
+    },
+    user_typing() {
+      this.$nextTick(function() {
+        var container = document.getElementById("chat-main");
+        container.scrollTop = container.scrollHeight;
+      });
+    }
+  }
+};
 </script>
 
 <style lang="scss">
 .typing {
-    color: #677778 !important;
+  color: #677778 !important;
 }
 </style>
