@@ -1,0 +1,67 @@
+.medium-toolbar-arrow-under:after {
+  border-color: #37474F transparent transparent transparent;
+  top: 100%; }
+.medium-editor-toolbar ul {background: transparent;}
+.medium-toolbar-arrow-over:before {
+  border-color: transparent transparent #242424 transparent;
+  top: -8px; }
+
+.medium-editor-toolbar {
+  background-color: #37474F;
+  border-radius: 19px; }
+  .medium-editor-toolbar li button {
+    background-color: transparent;
+    /*background: -webkit-linear-gradient(top, #242424, rgba(36, 36, 36, 0.89));
+    background: linear-gradient(to bottom, #242424, rgba(36, 36, 36, 0.89));*/
+    border: 0;
+    /*border-right: 1px solid #000;
+    border-left: 1px solid #333;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);*/
+    color: #fff;
+    height: 38px;
+    width: 38px;
+    font-size: 12px;
+    -webkit-transition: background-color .2s ease-in;
+            transition: background-color .2s ease-in; }
+    .medium-editor-toolbar li button:hover {
+      color: #FF9800; }
+  .medium-editor-toolbar li .medium-editor-button-first {
+    border-bottom-left-radius: 19px;
+    border-top-left-radius: 19px; }
+  .medium-editor-toolbar li .medium-editor-button-last {
+    border-bottom-right-radius: 19px;
+    border-top-right-radius: 19px; }
+  .medium-editor-toolbar li .medium-editor-button-active {
+    /*background-color: #000;
+    background: -webkit-linear-gradient(top, #242424, rgba(0, 0, 0, 0.89));
+    background: linear-gradient(to bottom, #242424, rgba(0, 0, 0, 0.89));*/
+    color: #FF9800; }
+
+.medium-editor-toolbar-form {
+  background: #242424;
+  border-radius: 5px;
+  color: #999; }
+  .medium-editor-toolbar-form .medium-editor-toolbar-input {
+    background: #242424;
+    box-sizing: border-box;
+    color: #ccc;
+    height: 50px; }
+  .medium-editor-toolbar-form a {
+    color: #fff; }
+
+.medium-editor-toolbar-anchor-preview {
+  background: #242424;
+  border-radius: 5px;
+  color: #fff; }
+
+.medium-editor-placeholder:after {
+  color: #b3b3b1; }
+  .medium-editor-toolbar li button[data-action='remove'] {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 50% !important;
+      padding: 0;
+      border: none !important;
+  }

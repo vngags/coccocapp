@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style media="screen">
+        .notes-placeholder {
+            position: relative;
+            padding: 0 2px 0 0;
+            margin-bottom: 50px;
+        }
+        .notes-placeholder .img {
+            position: absolute;
+            bottom: 23px;
+            right: 0;
+            width: 150px;
+            height: 120px;
+            border-radius: 4px;
+            background-color: #eaeaea;
+        }
+        .notes-placeholder .content {
+            padding-right: 160px;
+        }
+        .notes-placeholder .author {
+            margin-bottom: 10px;
+        }
+        .notes-placeholder .avatar {
+            cursor: default !important;
+            width: 34px;
+            height: 34px;
+            margin: 0 5px 0 0;
+            border-radius: 50%;
+            background-color: #eaeaea;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .notes-placeholder .name {
+            width: 20%;
+            height: 16px;
+            background-color: #eaeaea;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .notes-placeholder .title {
+            float: none !important;
+            width: 50%;
+            height: 20px;
+            margin: 0 0 15px !important;
+            background-color: #eaeaea;
+        }
+        .notes-placeholder .title::before {
+            content: "" !important;
+        }
+        .notes-placeholder .text {
+            width: 100%;
+            height: 16px;
+            margin: 0 0 10px;
+            background-color: #eaeaea;
+            animation: loading 1s ease-in-out infinite;
+            -webkit-animation: loading 1s ease-in-out infinite;
+            -moz-animation: loading 1s ease-in-out infinite;
+            -o-animation: loading 1s ease-in-out infinite;
+            -ms-animation: loading 1s ease-in-out infinite;
+        }
+        .notes-placeholder .animation-delay {
+            animation: loading 1s ease-in-out -.5s infinite;
+            -webkit-animation: loading 1s ease-in-out -.5s infinite;
+            -moz-animation: loading 1s ease-in-out -.5s infinite;
+            -o-animation: loading 1s ease-in-out -.5s infinite;
+            -ms-animation: loading 1s ease-in-out -.5s infinite;
+        }
+        .notes-placeholder .text {
+            width: 100%;
+            height: 16px;
+            margin: 0 0 10px;
+            background-color: #eaeaea;
+            animation: loading 1s ease-in-out infinite;
+            -webkit-animation: loading 1s ease-in-out infinite;
+            -moz-animation: loading 1s ease-in-out infinite;
+            -o-animation: loading 1s ease-in-out infinite;
+            -ms-animation: loading 1s ease-in-out infinite;
+        }
+        .notes-placeholder .short-text {
+            width: 40%;
+            animation: shortLoading 1s ease-in-out infinite;
+            -webkit-animation: shortLoading 1s ease-in-out infinite;
+            -moz-animation: shortLoading 1s ease-in-out infinite;
+            -o-animation: shortLoading 1s ease-in-out infinite;
+            -ms-animation: shortLoading 1s ease-in-out infinite;
+        }
+        .notes-placeholder .meta {
+            margin: 0 0 0 -5px;
+            color: #eaeaea;
+            font-size: 12px;
+        }
+        .notes-placeholder .meta div {
+            display: inline-block;
+            vertical-align: middle;
+            background-color: #eaeaea;
+        }
+        .notes-placeholder .meta .tag {
+            display: none;
+            height: 20px;
+            width: 100px;
+            margin-right: 10px;
+        }
+        .notes-placeholder .meta i {
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+        .notes-placeholder .meta .read {
+            height: 16px;
+            width: 50px;
+        }
+        .notes-placeholder .meta .small {
+            height: 16px;
+            width: 30px;
+        }
+        
+        @keyframes loading {
+            0% {
+                width: 60%;
+            }
+            50% {
+                width: 100%;
+            }
+            100% {
+                width: 60%;
+            }
+        }
+        @keyframes shortLoading {
+            0% {
+                width: 20%;
+            }
+            50% {
+                width: 40%;
+            }
+            100% {
+                width: 20%;
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div class="notes-placeholder index">
+            <div class="img"></div>
+            <div class="content">
+                <div class="author">
+                    <div class="avatar"></div>
+                    <div class="name"></div>
+                </div>
+                <div class="title"></div>
+                <div class="text"></div>
+                <div class="text animation-delay"></div>
+                <div class="text short-text"></div>
+                <div class="meta">
+                    <div class="tag"></div>
+                    <i class="iconfont ic-list-read"></i>
+                    <div class="read"></div>
+                    <i class="iconfont ic-list-comments"></i>
+                    <div class="small"></div>
+                    <i class="iconfont ic-list-like"></i>
+                    <div class="small"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

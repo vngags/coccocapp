@@ -1,0 +1,353 @@
+//NIGHT MODE COLOR
+$body_color: '#1e2834';
+$text_color: '#c8c8c8';
+$title_color: '#eee';
+$link_color: '#ddd';
+$link_hover_color: '#f5f5f5';
+$border_bottom_color: '#3b475a';
+$navbar_color: '#19222e';
+$navbar_border_bottom_color: '#2c3641';
+$dropdown_menu_color: '#2B3648';
+$dropdown_menu_hover_color: '#384558';
+$hr_color: '#2c3641';
+
+body {
+    &.night-mode {
+        transition: background 0.3s;
+        background: #{$body_color} !important;
+        color: #{$text_color};
+        &.detail {
+            background: #{$navbar_color} !important;
+        }
+        & #app > .container {
+            background: #{$body_color};
+        }
+        & a {
+            color: #{$link_color};
+            &:hover {
+                color: #{$link_hover_color};
+            }
+        }
+        & .navbar-default {
+            background: #{$navbar_color};
+            border-bottom-color: #{$navbar_border_bottom_color};
+            & .home {
+                border-right: 1px solid #{$border_bottom_color};
+            }
+            & .navbar-brand {
+                color: #{#{$title_color}};
+            }
+            & .navbar-right {
+                & li.write_bottom > a {
+                    background: #393939;
+                    border: 1px solid rgba(234, 111, 90, 0.47);
+                    &:hover {
+                        background: #333 !important;
+                    }
+                }
+            }
+            & .navbar-nav > li > a {
+                color: #{#{$title_color}};
+            }
+            & .navbar-nav > .open > a,
+            & .navbar-nav > .open > a:hover,
+            & .navbar-nav > .open > a:focus {
+                background-color: transparent;
+                color: #{#{$title_color}};
+            }
+            & .dropdown-menu {
+                background-color: #2B3648;
+                & > li {
+                    & > a {
+                        color: #{#{$title_color}};
+                        &:hover,
+                        &:focus {
+                            color: #{$link_hover_color};
+                            background-color: #{$dropdown_menu_hover_color};
+                        }
+                    }
+                }
+            }
+        }
+        & .form-control {
+            background: #2a3c51;
+            color: #{$text_color};
+            border-color: #4f5e77;
+            &:focus {
+                box-shadow: 0 0 0 1px #2c3641 !important;
+                background: #212c38;
+            }
+        }
+        & .write-toolbar {background: #{$body_color};}
+        & .panel {background: transparent;}
+        & .alert {
+            transition: all 0.3s;
+            &.alert-info {
+                background-color: #41474a;
+                border-color: #546471;
+                color: #53a1c7;
+            }
+        }
+        & ul.dropdown-menu {
+            &.with-arrow {
+                &:before {
+                    border-bottom-color: #3b475a !important;
+                }
+                &:after {
+                    border-bottom-color: #2b3648 !important;
+                }
+            }
+        }
+        & .modal {
+            background: rgba(130, 127, 127, 0.7);
+            & .modal-content {
+                background-color: #222C39;
+                & .modal-header {
+                    border-bottom: 1px solid #1d1d1d;
+                    background: #2B3648;
+                    color: #ddd;
+                    & .close {
+                        color: #bbb;
+                        opacity: .5;
+                    }
+                }
+                & .modal-footer {
+                    border-top: 1px solid #2c3541;
+                }
+            }
+        }
+        & .btn {
+            &.btn-primary {
+                color: #ddd;
+                background-color: #0a4a6f;
+                border-color: #013756;
+            }
+            &.btn-default {
+                color: #636b6f;
+                background-color: #2b3648;
+                border-color: #18202d;
+            }
+        }
+        & ul.list-inline-menu {
+            border-bottom-color: #2c3541 !important;
+            border: 1px solid #2c3541;
+            border-top: none;
+            & > li {
+                border-right: 1px solid #2c3541;
+                &.active {
+                    border-bottom-color: #eee;
+                }
+                & > a {
+                    color: #aaa;
+                }
+                &.active > a,
+                & > a:hover {
+                    color: #eee;
+                }
+                &:after {
+                    border-bottom-color: #495569;
+                }
+            }
+        }
+        & .with-border-bottom {
+            border-bottom-color: #{#{$border_bottom_color}};
+        }
+        & hr {
+            border-top: 1px solid #{$hr_color};
+        }
+        & .medium-editor-insert-plugin {
+            & .medium-insert-buttons {
+                & .medium-insert-buttons-show {
+                    background: #{$body_color} url('/images/add-circular-outlined-button-night.png') center center no-repeat;;
+                }
+                & .medium-insert-buttons-addons {
+                    & button.medium-insert-action {
+                        background: #{$body_color};
+                        box-shadow: 0 0 0px 1px #bbb;
+                        color: #ddd;
+                        &:hover {
+                            color: #fff;
+                            border-color: #fff;
+                        }
+                    }
+                }
+            }
+            &:focus-within {
+                box-shadow: 0 0 0 1px #2c3641 !important;
+                background: #212c38 !important;
+            }
+        }
+        & .action_area {
+            border: 1px solid #42505f;
+            & .upload_file {
+                border-right: 1px solid #42505f !important;
+            }
+            & .upload_file,
+            & #cropper_btn {
+                background: #2b3648;
+                color: #eee;
+                &:hover {
+                    background: #263140;
+                }
+            }
+        }
+        & .article-list-item {
+            border-bottom: 1px solid #{$border_bottom_color};
+        }
+        & .dropdown-menu {
+            background: #242f3f;
+            border-color: #{$border_bottom_color};
+            border: 1px solid rgb(59, 71, 90) !important;
+            & > li {
+                & > a {
+                    &:hover {
+                        background: #293648;
+                    }
+                }
+            }
+            &.with-arrow:before,
+            &.with-arrow-center:before {
+                border-bottom-color: rgb(59, 71, 90) !important;
+            }
+            &.with-arrow:after,
+            &.with-arrow-center:after {
+                border-bottom-color: #2b3648 !important;
+            }
+        }
+        & .user_info_dropdown {
+            background: #394861;
+            border: 1px solid rgb(78, 94, 117);
+            &:before {
+                border-bottom-color: rgb(78, 94, 117);
+            }
+            &:after {
+                border-bottom-color: #2e3a50;
+            }
+            & .user_info_header {
+                background: #2e3a50;
+                color: #fff;
+            }
+            & .user_info_footer {
+                border-top: 1px solid rgb(78, 94, 117);
+            }
+        }
+        & .form-comment {
+            background: #293747;
+            border: 1px solid #{$border_bottom_color};
+            & > textarea {
+                border: 1px solid #4f5e77;
+                background: #2a3c51 !important;
+            }
+        }
+        & .scrollTop {
+            border: 1px solid #{$border_bottom_color};
+            background: #1f2c3b;
+        }
+        & [data-tooltip] {
+            &:before {
+                background-color: rgb(48, 59, 74);
+            }
+            &:after {
+                border-top: 5px solid rgb(48, 59, 74);
+            }
+            &[data-placement="right"]:after {
+                border-right: 5px solid rgb(48, 59, 74) !important;
+            }
+            &[data-placement="left"]:after {
+                border-left: 5px solid rgb(48, 59, 74) !important;
+            }
+        }//[data-tooltip]
+        & .list-inline-menu-fixed {
+            & #profile-menu {
+                background: #1e2834;
+                border-bottom: 1px solid #{$border_bottom_color};
+                & > li {
+                    & > a {
+                        color: #bbb;
+                        &:hover {
+                            color: #{$title_color};
+                        }
+                    }
+                    &.active {
+                        & a {
+                            color: #{$title_color};
+                        }
+                    }
+                }
+            }
+        }//end list-inline-menu-fixed
+        & .author_item {
+            border-bottom-color: #{$border_bottom_color};
+        }//.author_item
+        & .detail-title {
+            & .navbar-brand {
+                background: #3b475a;
+            }
+        }
+        & .navbar-detail {
+            background: #{$navbar_color};
+            border-bottom-color: #{$border_bottom_color};
+            color: #eee;
+            & .home {
+                border-right: 1px solid #{$navbar_border_bottom_color};
+            }
+        }
+        & .comments {
+            border-top-color: #{$border_bottom_color};
+            & .comments_list_statistic  {
+                & .list-inline-menu {
+                    border: none;
+                    & > li {
+                        border: none;
+                    }
+                }
+            }
+        }
+        & .comments_list_content {
+            & > .comment_item {
+                border-bottom: 2px solid #{$border_bottom_color};
+                & .level1 {
+                    & .comment_item {
+                        & .comment_body {
+                            background: #1b2530;
+                            border: 1px solid #2c3647 !important;
+                            &:before {
+                                border-right-color: #2c3647;
+                            }
+                            &:after {
+                                border-right-color: #1b2530;
+                            }
+                        }
+                    }
+                    & .left-line {
+                        background: #{$border_bottom_color};
+                    }
+                }
+                & .comment_author {
+                    & .meta {
+                        & .time {
+                            border-bottom-color: #{$border_bottom_color};
+                        }
+                    }
+                }//comment_author
+            }//comment_item
+        }//comments_list_content
+        /* Notifications */
+        & .notifications {
+            & .dropdown-menu {
+                &  li {
+                    & > a {
+                        border-bottom: 1px solid #3b475a;
+                        color: #ddd;
+                    }
+                }
+                & .notify-title h4 {
+                    border-bottom: 1px solid #3b475a;
+                }
+                & .notify-footer {
+                    border-top: 1px solid #3b475a;
+                }
+            }
+        }//notifications
+    }   // End night-mode
+}
