@@ -4618,6 +4618,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7508,7 +7516,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.video-call {\n  width: 100%;\n  height: calc(100% - 102px);\n}\n.video-call .video-call-main {\n    position: relative;\n    width: 100%;\n    height: 100%;\n}\n.video-call .video-call-main #myvideo {\n      width: 100%;\n      height: 100%;\n      position: relative;\n      background: #fff;\n}\n.video-call .video-call-main #themvideo {\n      position: absolute;\n      background: #fff;\n      width: 200px;\n      height: 200px;\n      bottom: 10px;\n      right: 10px;\n      border: 1px solid #eee;\n}\n", ""]);
+exports.push([module.i, "\n.video-call {\n  width: 100%;\n  height: calc(100% - 102px);\n}\n.video-call-main {\n  position: relative;\n  width: 100%;\n  height: 100%;\n}\n#myvideo {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  background: #fff;\n}\n#themvideo {\n  position: absolute;\n  background: #fff;\n  width: 200px;\n  height: 200px;\n  bottom: 10px;\n  right: 10px;\n  border: 1px solid #eee;\n}\n", ""]);
 
 // exports
 
@@ -57360,7 +57368,7 @@ var render = function() {
   return _c("div", { staticClass: "video-call" }, [
     _c("div", { staticClass: "top" }, [
       _c("span", [
-        _vm._v("Đến: "),
+        _vm._v("Đến:\n      "),
         _vm.chatter && _vm.chatter != undefined
           ? _c("span", { staticClass: "name" }, [
               _c("a", { attrs: { href: "/u/" + _vm.chatter.slug } }, [
@@ -57370,23 +57378,7 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _c("ul", { staticClass: "list-inline pull-right" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("li", [
-          _c(
-            "a",
-            {
-              on: {
-                click: function($event) {
-                  _vm.is_videocall = true
-                }
-              }
-            },
-            [_c("i", { staticClass: "fa fa-video-camera size20i" })]
-          )
-        ])
-      ])
+      _vm._m(0)
     ]),
     _vm._v(" "),
     _vm._m(1)
@@ -57397,9 +57389,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "" } }, [
-        _c("i", { staticClass: "fa fa-phone size20i" })
+    return _c("ul", { staticClass: "list-inline pull-right" }, [
+      _c("li", [
+        _c("a", { attrs: { href: "" } }, [
+          _c("i", { staticClass: "fa fa-phone size20i" })
+        ])
       ])
     ])
   },
